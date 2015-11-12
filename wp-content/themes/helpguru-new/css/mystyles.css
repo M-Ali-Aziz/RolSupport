@@ -1,0 +1,45 @@
+/*Form main styling*/
+form div{
+	margin-bottom: 20px;
+}
+form input{
+	width: 300px;
+}
+form div i {
+	margin: 7px 0 0 0;
+	width: 35px;
+}
+.contact_form_submit_button{
+	margin-left: 40px;
+}
+.successMessage{
+	color: white;
+	background: #006400;
+	margin-left: 10px;
+	margin-bottom: 0;
+	padding-top: 8px;
+	text-align: center;
+	display: inline-block;
+	width: 40vw;
+	max-width: 400px;
+	height: 43px;
+	border-radius: 5px;
+}
+.errorMessage{
+	color: white;
+	background: #8B0000;
+	margin-left: 10px;
+	margin-bottom: 0;
+	padding-top: 8px;
+	text-align: center;
+	display: inline-block;
+	width: 40vw;
+	max-width: 400px;
+	height: 43px;
+	border-radius: 5px;
+}
+
+/*Error Report Form Styling*/
+.drop-down-holder select{
+	height: 40px;
+}
