@@ -47,7 +47,7 @@ Template Name: Contact Form
 				</div> -->
 				<!-- Submit button -->
 				<div class="contact_form_submit_button">
-					<input type="submit" id="contact_form_submit_button" role="button" value="Send">
+					<input type="submit" class="submit_button" id="contact_form_submit_button" role="button" value="Send">
 					<!-- success message -->
 					<div class="successMessage" style="display: none;">Successfully send!</div>
 					<!-- error message -->

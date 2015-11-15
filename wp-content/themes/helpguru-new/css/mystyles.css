@@ -5,6 +5,9 @@ form div{
 form input{
 	width: 300px;
 }
+form input:focus , select:focus, textarea:focus{
+	box-shadow: 0 1px 10px #696969;
+}
 form div i {
 	margin: 7px 0 0 0;
 	width: 35px;

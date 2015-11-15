@@ -112,7 +112,7 @@ Template name: Error Report Form
 				</div>
 				<!-- Submit button -->
 				<div class="contact_form_submit_button">
-					<input type="Submit" id="error_report_form_submit_button" role="button" value= "Send">
+					<input type="Submit" class="submit_button"  id="error_report_form_submit_button" role="button" value= "Send">
 					<!-- success message -->
 					<div class="successMessage" style="display: none;">Successfully send!</div>
 					<!-- error message -->

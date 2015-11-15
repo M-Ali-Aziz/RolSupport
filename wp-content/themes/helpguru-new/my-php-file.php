@@ -1,12 +1,9 @@
 <?php
-
-
-define('ADMIN_USER','mikeschinkel');
-  $admin_user = get_userdatabylogin(ADMIN_USER);
-  $registered_email = "m_ali1426@hotmail.com";
-  wp_mail($admin_user->user_email,
-    'New email test',
-    "New email testing to see if we get any.");
+// incloud admin email
+//('wp -> log in -> profile -> email')
+require_once('../../../wp-config.php');
+$admin_email = get_option( 'admin_email' ); 
+echo $admin_email;
 
 // db info
 $servername = "localhost";
@@ -19,6 +16,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+
 if ($_REQUEST["contact_form_data"]){
 
   $obj = $_POST["contact_form_data"];
@@ -30,13 +28,34 @@ if ($_REQUEST["contact_form_data"]){
   // sql requset
   $sql = "INSERT INTO contact_form (name, email, subject, description)
   VALUES ( '$name', '$email', '$subject', '$description')";
-  // }
+
+
   // insert into db
     print_r($_REQUEST);
     echo($name);
   if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
     print_r($_POST);
+
+    // send notification email to sender/user
+    $to = $obj["Email"];
+    $subject = $obj["Subject"];
+    $message = "This is a notification email from ROL Support - Contact Form.";
+    $from = $admin_email;
+    $headers = "From:" . $from;
+    mail($to,$subject,$message,$headers);
+    echo "Mail From " . $from;
+    echo "Mail Sent to " . $to;
+    //send email to admin
+    $to_admin .= $admin_email;// to admin
+    // $subject_admin = $obj["Subject"];
+    // $message_admin = "This is a notification email from ROL Support - Contact Form.";
+    $from_admin = $obj["Email"];
+    $headers_admin = "From:" . $from_admin;
+    mail($to_admin,$subject,$message,$headers_admin);
+    echo "(admin)Mail From " . $from_admin;
+    echo "(admin)Mail Sent to " . $to_admin;
+
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
@@ -104,6 +123,17 @@ if ($_REQUEST["error_report_form_data"]){
     print_r($product);
     print_r($obj);
     echo "hihihih!";
+
+    // send an email
+    $to = $obj["Email"] . ', '; // to sender
+    $to .= $admin_email;// to admin 
+    $subject = $obj["Subject"];
+    $message = "This is a notification email from ROL Support - Error Report Form.";
+    $from = $admin_email;
+    $headers = "From:" . $from;
+    mail($to,$subject,$message,$headers);
+    echo "Mail From " . $from;
+    echo "Mail Sent to " . $to;
 
   }else{
     echo "Error: " . $sql . "<br>" . $conn->error;
