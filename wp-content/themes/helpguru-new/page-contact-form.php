@@ -22,29 +22,34 @@ Template Name: Contact Form
 				<!-- Name -->
 				<div>
 					<label for="contact_form_name"><i class="fa fa-user fa-2x"></i></label>
-					<input type="text" name="contact_form_name" id="contact_form_name"  placeholder="Your Name" required>
+					<input type="text" name="contact_form_name" id="contact_form_name"  placeholder="Your Name">
 				</div>
 				<!-- Email -->
 				<div>
 					<label for="contact_form_email"><i class="fa fa-envelope fa-2x"></i></label>
-					<input type="email" name="contact_form_email" id="contact_form_email" placeholder="Your Email" required>
+					<input type="email" name="contact_form_email" id="contact_form_email" placeholder="Your Email">
 				</div>
 				<!-- Subject -->
 				<div>
 					<label for="contact_form_subject"><i class="fa fa-tag fa-2x"></i></label>
-					<input type="text" name="contact_form_subject" id="contact_form_subject" placeholder="Subject" required>
+					<input type="text" name="contact_form_subject" id="contact_form_subject" placeholder="Subject">
 				</div>
 				<!-- Description -->
 				<div>
 					<label for="contact_form_description"><i class="fa fa-file-text fa-2x"></i></i></label>
-					<textarea rows="4" name="contact_form_description" id="contact_form_description" placeholder="Description" required></textarea>
+					<textarea rows="4" name="contact_form_description" id="contact_form_description" placeholder="Description"></textarea>
 				</div>
 
+
 				<!-- File upload -->
-				<!-- <div>
+				<div id="fileUpHolder">
 					<label></label>
-					<input id="fileUpload" type="file">
-				</div> -->
+					<input name="file_input" id="file_input" type="file" multiple>
+				</div>
+
+				<!-- <div id="fileButton">files upload</div> -->
+
+
 				<!-- Submit button -->
 				<div class="contact_form_submit_button">
 					<input type="submit" class="submit_button" id="contact_form_submit_button" role="button" value="Send">

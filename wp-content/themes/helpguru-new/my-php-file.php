@@ -1,15 +1,12 @@
 <?php
-// incloud admin email
-//('wp -> log in -> profile -> email')
-require_once('../../../wp-config.php');
-$admin_email = get_option( 'admin_email' ); 
-echo $admin_email;
+
+
 
 // db info
 $servername = "localhost";
 $username = "root";
 $password = "mysql";
-$dbname = "rol_support_forms";
+$dbname = "forms";
 // connect to db
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
@@ -17,67 +14,24 @@ if ($conn->connect_error) {
 }
 
 
-if ($_REQUEST["contact_form_data"]){
+// if ($_REQUEST["contact_form_data"]){
 
-  $obj = $_POST["contact_form_data"];
+//   $obj = $_POST["contact_form_data"];
 
-  $name = $obj["Name"];
-  $email = $obj["Email"];
-  $subject = $obj["Subject"];
-  $description = $obj["Description"];
-  // sql requset
-  $sql = "INSERT INTO contact_form (name, email, subject, description)
-  VALUES ( '$name', '$email', '$subject', '$description')";
-
-
-  // insert into db
-    print_r($_REQUEST);
-    echo($name);
-  if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-    print_r($_POST);
-
-    // send notification email to sender/user
-    $to = $obj["Email"];
-    $subject = $obj["Subject"];
-    $message = "This is a notification email from ROL Support - Contact Form.";
-    $from = $admin_email;
-    $headers = "From:" . $from;
-    mail($to,$subject,$message,$headers);
-    echo "Mail From " . $from;
-    echo "Mail Sent to " . $to;
-    //send email to admin
-    $to_admin .= $admin_email;// to admin
-    // $subject_admin = $obj["Subject"];
-    // $message_admin = "This is a notification email from ROL Support - Contact Form.";
-    $from_admin = $obj["Email"];
-    $headers_admin = "From:" . $from_admin;
-    mail($to_admin,$subject,$message,$headers_admin);
-    echo "(admin)Mail From " . $from_admin;
-    echo "(admin)Mail Sent to " . $to_admin;
-
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
-  // close the conaction to db
-  $conn->close();
-}
-
-// // insert contact form data to db
-// if (isset($_POST["contact_form_data"])){
-//   // the data in variables
-//   $obj = json_decode($_POST['contact_form_data'], true);
-//   $name = $obj['Name'];
-//   $email = $obj['Email'];
-//   $subject = $obj['Subject'];
-//   $description = $obj['Description'];
-//   // sql requset 
-//   $sql = "INSERT INTO contact_form (name, email, subject, description)
+//   $name = $obj["Name"];
+//   $email = $obj["Email"];
+//   $subject = $obj["Subject"];
+//   $description = $obj["Description"];
+//   // sql requset
+//   $sql = "INSERT INTO contactform (name, email, subject, description)
 //   VALUES ( '$name', '$email', '$subject', '$description')";
+
+
 //   // insert into db
 //   if ($conn->query($sql) === TRUE) {
 //     echo "New record created successfully";
-//     // print_r($_POST);
+//     print_r ($_POST);
+
 //   } else {
 //     echo "Error: " . $sql . "<br>" . $conn->error;
 //   }
@@ -86,109 +40,29 @@ if ($_REQUEST["contact_form_data"]){
 // }
 
 
-// insert error report form data to db
-if ($_REQUEST["error_report_form_data"]){
+// // if ($_REQUEST["contact_form_data"]){
+// if (isset($_POST["formData"])){
 
-  $obj = $_POST["error_report_form_data"];
+//   $obj = $_POST["formData"];
 
-  $name = $obj["Name"];
-  $email = $obj["Email"];
-  $product = $obj["Product"];
-  $hardware_v = $obj["Hardware_v"];
-  $software_v = $obj["Software_v"];
-  $idesk_v_android = $obj["iDesk_v_android"];
-  $android_v = $obj["Android_v"];
-  $idesk_v_ios = $obj["iDesk_v_ios"];
-  $ios_v = $obj["iOS_v"];
-  $subject = $obj["Subject"];
-  $description = $obj["Description"];
+//   $name = $obj["contact_form_name"];
+//   $email = $obj["contact_form_email"];
+//   $subject = $obj["contact_form_subject"];
+//   $description = $obj["contact_form_description"];
+//   // sql requset
+//   $sql = "INSERT INTO contact_form (name, email, subject, description)
+//   VALUES ( '$name', '$email', '$subject', '$description')";
 
 
-  // $sql = "INSERT INTO error_report_form (name, email, subject, description, product, hardware_v, idesk_v_android, android_v, software_v, idesk_v_ios, ios_v) VALUES ('$name', '$email', '$subject', '$description', '$product', '$hardware_v', '$idesk_v_android', '$android_v','$software_v','$idesk_v_ios', '$ios_v')";
+//   // insert into db
+//   if ($conn->query($sql) === TRUE) {
+//     echo "New record created successfully";
+//     print_r ($_POST);
 
-  if ($product === "id/idrive"){
-    $sql = "INSERT INTO error_report_form (name, email, subject, description, product, hardware_v,software_v) VALUES ('$name', '$email', '$subject', '$description', '$product', '$hardware_v','$software_v')"; 
-  }
-  else if($product === "app-android"){
-    $sql = "INSERT INTO error_report_form (name, email, subject, description, product, hardware_v, idesk_v_android, android_v,software_v) VALUES ('$name', '$email', '$subject', '$description', '$product', '$hardware_v', '$idesk_v_android', '$android_v','$software_v')"; 
-  }
-  else if($product === "app-ios"){
-    $sql = "INSERT INTO error_report_form (name, email, subject, description, product, hardware_v, idesk_v_ios, ios_v, software_v) VALUES ('$name', '$email', '$subject', '$description', '$product', '$hardware_v', '$idesk_v_ios', '$ios_v', '$software_v')"; 
-  }
-
-
-  if ($conn->query($sql) === TRUE){
-    echo "Successfully iserted data";
-    print_r($_POST);
-    print_r($product);
-    print_r($obj);
-    echo "hihihih!";
-
-    // send an email
-    $to = $obj["Email"] . ', '; // to sender
-    $to .= $admin_email;// to admin 
-    $subject = $obj["Subject"];
-    $message = "This is a notification email from ROL Support - Error Report Form.";
-    $from = $admin_email;
-    $headers = "From:" . $from;
-    mail($to,$subject,$message,$headers);
-    echo "Mail From " . $from;
-    echo "Mail Sent to " . $to;
-
-  }else{
-    echo "Error: " . $sql . "<br>" . $conn->error;
-    // print_r($obj);
-
-  }
-
-  $conn->close();
-}
-
-
-
-
-
-// // insert error report form data to db
-// if (isset($_POST["error_report_form_data"])){
-
-//   $obj = json_decode($_POST["error_report_form_data"], true);
-
-//   $name = $obj["Name"];
-//   $email = $obj["Email"];
-//   $product = $obj["Product"];
-//   $hardware_v = $obj["Hardware_v"];
-//   $software_v = $obj["Software_v"];
-//   $idesk_v_android = $obj["iDesk_v_android"];
-//   $android_v = $obj["Android_v"];
-//   $idesk_v_ios = $obj["iDesk_v_ios"];
-//   $ios_v = $obj["iOS_v"];
-//   $subject = $obj["Subject"];
-//   $description = $obj["Description"];
-
-//   if ($product === "id/idrive"){
-//     $sql = "INSERT INTO error_report_form (name, email, subject, description, product, hardware_v,software_v) VALUES ('$name', '$email', '$subject', '$description', '$product', '$hardware_v','$software_v')"; 
-//   }
-//   else if($product === "app-android"){
-//     $sql = "INSERT INTO error_report_form (name, email, subject, description, product, hardware_v, idesk_v_android, android_v,software_v) VALUES ('$name', '$email', '$subject', '$description', '$product', '$hardware_v', '$idesk_v_android', '$android_v','$software_v')"; 
-//   }
-//   else if($product === "app-ios"){
-//     $sql = "INSERT INTO error_report_form (name, email, subject, description, product, hardware_v, idesk_v_ios, ios_v, software_v) VALUES ('$name', '$email', '$subject', '$description', '$product', '$hardware_v', '$idesk_v_ios', '$ios_v', '$software_v')"; 
-//   }
-
-
-//   if ($conn->query($sql) === TRUE){
-//     echo "Successfully iserted data";
-//     // print_r($_POST);
-//     // print_r($product);
-//     // print_r($obj);
-//     // echo "hihihih!";
-
-//   }else{
+//   } else {
 //     echo "Error: " . $sql . "<br>" . $conn->error;
-//     // print_r($obj);
-
 //   }
-
+//   // close the conaction to db
 //   $conn->close();
 // }
 
@@ -197,58 +71,84 @@ if ($_REQUEST["error_report_form_data"]){
 
 
 
-// $host = "127.0.0.1";
-// $user = "root";
-// $pass = "mysql";
-// $db = "rol_support_forms";
 
-// $dbc = new PDO("mysql:host=" . $host . ";dbname=" . $db, $user, $pass);
-// $dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//You need to add server side validation and better error handling here
 
-// $name = @$_POST['Name'];
-// $email = @$_POST['Email'];
-// $subject = @$_POST['Subject'];
-// $description = @$_POST['Description'];
+$data = array();
 
+if(isset($_GET['files']))
+{ 
 
-// $q = "INSERT INTO contact_form ( name, email, subject, description ) VALUES ( Name, Email, Subject, Description)";
+  $error = false;
+  $files = array();
 
-// // $q = "INSERT INTO contact_form (name, email, subject, description ) VALUES ('Ali', 'alialicom', 'Ali testing', 'Testing save to db.')";
-
-//     $query = $dbc->prepare($q);
-//     $query->bindParam('Name', $name);
-//     $query->bindParam('Email', $email);
-//     $query->bindParam('Subject', $subject);
-//     $query->bindParam('Description', $description);
-
-
-
-//     $results = $query->execute();
-
-//   echo($name);
-//   echo($email);
+  $uploaddir = './myImg/';
+  foreach($_FILES as $file)
+  {
+    if(move_uploaded_file($file['tmp_name'], $uploaddir .basename($file['name'])))
+    {
+      $files[] = $uploaddir .$file['name'];
+    }
+    else
+    {
+        $error = true;
+    }
+  }
+  $data = ($error) ? array('error' => 'There was an error uploading your files') : array('files' => $files);
+}
+else
+{
+  $data = array('success' => 'Form was submitted', 'formData' => $_POST);
 
 
 
+  $name = $_POST["contact_form_name"];
+  $email = $_POST["contact_form_email"];
+  $subject = $_POST["contact_form_subject"];
+  $description = $_POST["contact_form_description"];
+  // sql requset
+  $sql = "INSERT INTO contactform (name, email, subject, description)
+  VALUES ( '$name', '$email', '$subject', '$description')";
+
+  // insert into db
+  if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+    print_r ($_POST);
+
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+
+
+
+
+  $file_names = $_POST['filenames'];
+  foreach ($file_names as $filename) {
+
+    $file_name = $filename;
+
+    $sql = "INSERT INTO contactformfiles (filename)
+    VALUES ( '$file_name')";
+
+    // insert into db
+    if ($conn->query($sql) === TRUE) {
+      echo "New FILE created successfully";
+      print_r ($_POST);
+
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }  
+  }
+
+  
+}
+
+echo json_encode($data);
 
 
 
 
 
-
-
-
-
-
-
-
-// include_once ('../../../wp-config.php');
-// include_once ('../../../wp-load.php');
-// include_once ('../../../wp-includes/wp-db.php');
-// include_once ('../../../wp-includes/pluggable.php');
-
-// $imageName = @$_FILES['image']['name'];
-// $query->bindParam(':image', $imageName);
 
 
 ?>

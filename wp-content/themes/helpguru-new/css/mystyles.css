@@ -42,6 +42,11 @@ form div i {
 	border-radius: 5px;
 }
 
+/*Contact Form*/
+/*#fileUpHolder {
+	display: no
+}*/
+
 /*Error Report Form Styling*/
 .drop-down-holder select{
 	height: 40px;
