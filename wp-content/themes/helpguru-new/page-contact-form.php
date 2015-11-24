@@ -22,33 +22,29 @@ Template Name: Contact Form
 				<!-- Name -->
 				<div>
 					<label for="contact_form_name"><i class="fa fa-user fa-2x"></i></label>
-					<input type="text" name="contact_form_name" id="contact_form_name"  placeholder="Your Name">
+					<input type="text" name="contact_form_name" id="contact_form_name"  placeholder="Your Name" required>
 				</div>
 				<!-- Email -->
 				<div>
 					<label for="contact_form_email"><i class="fa fa-envelope fa-2x"></i></label>
-					<input type="email" name="contact_form_email" id="contact_form_email" placeholder="Your Email">
+					<input type="email" name="contact_form_email" id="contact_form_email" placeholder="Your Email" required>
 				</div>
 				<!-- Subject -->
 				<div>
 					<label for="contact_form_subject"><i class="fa fa-tag fa-2x"></i></label>
-					<input type="text" name="contact_form_subject" id="contact_form_subject" placeholder="Subject">
+					<input type="text" name="contact_form_subject" id="contact_form_subject" placeholder="Subject" required>
 				</div>
 				<!-- Description -->
 				<div>
 					<label for="contact_form_description"><i class="fa fa-file-text fa-2x"></i></i></label>
-					<textarea rows="4" name="contact_form_description" id="contact_form_description" placeholder="Description"></textarea>
+					<textarea rows="4" name="contact_form_description" id="contact_form_description" placeholder="Description" required></textarea>
 				</div>
-
 
 				<!-- File upload -->
-				<div id="fileUpHolder">
-					<label></label>
-					<input name="file_input" id="file_input" type="file" multiple>
+				<div class="fileUploadHolder">
+					<label for="contact_form_file_input"><i class="fa fa-upload fa-2x"></i></label>
+					<input name="contact_form_file_input" id="contact_form_file_input" type="file" multiple>
 				</div>
-
-				<!-- <div id="fileButton">files upload</div> -->
-
 
 				<!-- Submit button -->
 				<div class="contact_form_submit_button">
@@ -67,7 +63,7 @@ Template Name: Contact Form
 </section>
 
 <?php
-	wp_enqueue_script('myfunctions', get_template_directory_uri() . '/js/myfunctions.js');
+	wp_enqueue_script('myfunctions', get_template_directory_uri() . '/js/contact-form.js');
 	wp_enqueue_style('mystyles', get_template_directory_uri() . '/css/mystyles.css');
 ?>
 

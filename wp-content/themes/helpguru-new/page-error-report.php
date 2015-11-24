@@ -110,6 +110,14 @@ Template name: Error Report Form
 					<label for="error_report_form_description"><i class="fa fa-file-text fa-2x"></i></i></label>
 					<textarea rows="4" name="error_report_form_description" id="error_report_form_description" placeholder="Description" required></textarea>
 				</div>
+
+				<!-- File upload -->
+				<div class="fileUploadHolder">
+					<label for="error_report_file_input"><i class="fa fa-upload fa-2x"></i></label>
+					<input name="error_report_file_input" id="error_report_file_input" type="file" multiple>
+				</div>
+
+
 				<!-- Submit button -->
 				<div class="contact_form_submit_button">
 					<input type="Submit" class="submit_button"  id="error_report_form_submit_button" role="button" value= "Send">
@@ -126,7 +134,7 @@ Template name: Error Report Form
 </section>
 
 <?php
-	wp_enqueue_script('myfunctions', get_template_directory_uri() . '/js/myfunctions.js');
+	wp_enqueue_script('myfunctions', get_template_directory_uri() . '/js/error-report-form.js');
 	wp_enqueue_style('mystyles', get_template_directory_uri() . '/css/mystyles.css');
 ?>
 
